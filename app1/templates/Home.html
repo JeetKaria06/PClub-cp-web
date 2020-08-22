@@ -1,0 +1,66 @@
+{% extends 'navbar.html' %}
+{% load static %}
+{% block Extra_css  %}
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/Home_style.css' %}">
+{% endblock %}
+
+{% block navband %}
+<img src="{% static 'media/White_T.png' %}" alt="" srcset=""></a>
+{% endblock %}
+
+{% block navbar  %}
+<div class="row home_sec1">
+    <div class="col-sm home_sec1_img ">
+        <img src="{% static 'media/home_img1_programmer.jpg' %}" alt="image not found" srcset="">
+    </div>
+    <div class="col-sm home_sec1_txt">
+        <div class="home_title">
+            Welcome,
+            Programming Club
+            Contest
+        </div>
+        <span class="ahduni" >Ahmedabad University</span> 
+        <div>
+            <button type="button" class="btn ">
+                <span class="cta" onclick="myFunction()">
+                    <span>Register</span>
+                    <svg width="13px" height="10px" viewBox="0 0 13 10">
+                      <path d="M1,5 L11,5"></path>
+                      <polyline points="8 1 12 5 8 9"></polyline>
+                    </svg>
+                </span>
+            </button>
+        </div>
+        
+    </div>
+</div>
+{% endblock %}
+{% block Extra_js %}
+<script>
+        function myFunction() {
+          var CF_ID = prompt("Enter your codeforces handle");
+          var Email = prompt("Enter your ahduni email-id");
+          if (CF_ID != null && Email != null && Email.indexOf("@ahduni.edu.in")!=-1 ) {
+                $.ajax({
+                    url: "{% url  'Register' %}",
+                    method:"get",
+                    data: {
+                      'cf_id': CF_ID,
+                      'email': Email
+                    },
+                    success: function () {
+                        alert("Registered Sucessfully :)")                
+                    },
+                    error:function(error_data){
+                        alert("Something Went Wrong :( ")
+                    }
+                  });
+          }
+          else {
+              alert("Something Went Wrong :( ")
+            }
+        }
+</script>
+
+{% endblock %}

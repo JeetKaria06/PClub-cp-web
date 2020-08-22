@@ -1,0 +1,114 @@
+body {
+  background: #255c6d;
+  padding: 0;
+  margin: 0;
+}
+.home_sec1_img,
+.row,
+.col-sm {
+  max-width: 100vw;
+  padding: 0;
+  margin: 0;
+}
+.home_sec1 {
+  background: url("../media/circle.png") no-repeat;
+  background-size: 100vh;
+  background-position-y: -65vh;
+  background-position-x: 75vw;
+}
+
+.home_sec1_img {
+  padding-top: 10vh;
+}
+.home_sec1_img > img {
+  max-height: 90vh;
+  width: auto;
+  max-width: 100vw;
+}
+.home_sec1_txt {
+  padding-left: 0;
+  margin-left: 0;
+}
+.home_title {
+  color: white;
+  font-size: 5.5vw;
+  padding-top: 27vh;
+  padding-right: 2vw;
+  line-height: 12vh;
+}
+.ahduni{
+  font-size:1.7vw; 
+  line-height: 8vh;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.cta {
+  position: relative;
+  margin: auto;
+  padding: 19px 22px;
+  transition: all 0.2s ease;
+}
+.cta:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.9);
+  width: 56px;
+  height: 56px;
+  transition: all 0.3s ease;
+}
+.cta span {
+  position: relative;
+  font-size: 16px;
+  line-height: 18px;
+  font-weight: 900;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+.cta svg {
+  position: relative;
+  top: 0;
+  margin-left: 10px;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: #111;
+  stroke-width: 2;
+  transform: translateX(-5px);
+  transition: all 0.3s ease;
+}
+.cta:hover:before {
+  width: 100%;
+  background: #ffffff;
+}
+.cta:hover svg {
+  transform: translateX(0);
+}
+.cta:active {
+  transform: scale(0.96);
+}
+
+@media only screen and (max-width: 600px) {
+  .bg-transparent {
+    background: #255c6d !important;
+  }
+  .home_title {
+    padding-top: 0vh;
+    padding-left: 3vw;
+    color: white;
+    font-size: 15vw;
+    line-height: 7vh;
+  }
+  .ahduni{
+    font-size: 7vw;
+    padding-left: 3vw;
+    padding-top: 2vh;
+  }
+}
