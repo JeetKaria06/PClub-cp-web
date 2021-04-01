@@ -22,4 +22,6 @@ urlpatterns = [
     path('Leaderbord', views.Leaderbord,name='Leaderbord'),
     path('Register', views.Register,name='Register'),
     path('AxYYzz786_rj', views.AxYYzz786_rj,name='AxYYzz786_rj'),
+    path('AxYYzz786_rj_leaderboard_overcome_502', views.AxYYzz786_rj_leaderboard_overcome_502, name='AxYYzz786_rj_leaderboard_overcome_502'),
+    path('fetch_timer', views.fetch_timer, name="fetch_timer")
 ]

@@ -1,13 +1,25 @@
-from django.shortcuts import render,HttpResponse
-from .models import Questions, Users, Leaderboard
+from django.shortcuts import render,HttpResponse, redirect
+from django.http import JsonResponse
+from .models import Questions, Users, Leaderboard, Timer
 import requests
 import time
+import json
 import datetime
+from django.views.decorators.csrf import csrf_exempt
+
 # Create your views here.
 def Home(request):
-    return render(request,'Home.html')
+    return render(request,'Home.html', {})
 
 def Ques(request):
+    current_time = datetime.datetime.now()
+    if Timer.objects.exists():
+        start_time = Timer.objects.all()[0].start_time_stamp
+    else:
+        start_time = current_time
+
+    if current_time < start_time:
+        return redirect('Home')    
     questions = Questions.objects.all()
     return render(request,'Questions.html', {'questions':questions})
 
@@ -21,44 +33,73 @@ def Leaderbord(request):
     return render(request,'Leaderbord.html', {'leaders':leaders, 'totalPros':len(questions)})
 
 def AxYYzz786_rj(request):
+    if not Timer.objects.exists():
+        return JsonResponse({})
+    
+    end = Timer.objects.all()[0].end_time_stamp
+    current = datetime.datetime.now()
+
+    if(current>end):
+        return JsonResponse({})
+    
+    lt = time.localtime()
     quedict = {}
-    Leaderboard.objects.all().delete()
 
     questions = Questions.objects.all()
     for question in questions:
         quedict[question.rcid()] = 1
 
+    start = time.time()
     users = Users.objects.all()
+    userlist = []
     for user in users:
-        came = {}
-        score = 0
-        handle = user.usr_name
-        status_code = 429
-        while status_code != 200:
-            response = requests.get("https://codeforces.com/api/user.status?handle="+handle+"&from=1")
-            status_code = response.status_code
-            if status_code == 429:
-                time.sleep(1)
-        print(response.status_code)
-        stat = response.json()['result']
-        for submission in stat:
-            if(submission["problem"].get("contestId")):
-                iid = str(submission["problem"]["contestId"]) + submission["problem"]["index"]
-                if quedict.get(iid) and submission["verdict"]=="OK":
-                    if(came.get(iid)):
-                        score = score
-                    else:
-                        score += 1
-                    came[iid]=1
+        userlist.append(user.usr_name)
 
-        # print(score, handle)
-        l = Leaderboard(usr_name=handle, score=score, profile_pic=user.profile_pic)
+    data = {
+        'response': userlist,
+        'questionlist': quedict,
+        'lastRefreshed': time.asctime(lt),
+        'secondsTaken': time.time()-start
+    }
+    return JsonResponse(data)
+
+@csrf_exempt
+def AxYYzz786_rj_leaderboard_overcome_502(request):
+    data=request.POST.getlist('score')
+    user_handle = request.POST.getlist('handle')
+    question_user_count = json.loads(request.POST.getlist('question_user_count')[0])
+    print(question_user_count)
+    j=0
+    Leaderboard.objects.all().delete()
+    for i in range(len(data)):
+        l = Leaderboard(usr_name=user_handle[i], score=int(data[i]), profile_pic=Users.objects.get(usr_name=user_handle[i]).profile_pic)
         l.save()
-    return HttpResponse("Done.")
+    
+    for key in question_user_count.keys():
+        string = "https://codeforces.com/contest/"+key[:-1]+"/problem/"+key[-1]
+        ques = Questions.objects.get(Question_link=string)
+        ques.totalCount = question_user_count[key]
+        ques.save()
+        # print(key)
+
+    return JsonResponse({'user_handle':user_handle, 'user_score':data})
 
 def Register(request):
-    u = Users(usr_name=request.GET.get('cf_id'), usr_mail=request.GET.get('email'))
-    u.register()
-    u.getPic()
-    u.save()
-    return render(request,'Home.html')
+    allow=1
+    handle = request.GET.get('cf_id')
+    mailid = request.GET.get('email')
+    if (Users.objects.filter(usr_name=handle).exists()):
+        allow=0
+    else:
+        u = Users(usr_name=handle, usr_mail=mailid)
+        u.register()
+        u.getPic()
+        u.save()
+    return JsonResponse({"response": allow})
+
+def fetch_timer(request):
+    if not Timer.objects.exists():
+        return JsonResponse({})
+    start = Timer.objects.all()[0].start_time_stamp
+    end = Timer.objects.all()[0].end_time_stamp
+    return JsonResponse({"start_ts": start.strftime("%b %d, %Y %H:%M:%S"), "end_ts": end.strftime("%b %d, %Y %H:%M:%S")})

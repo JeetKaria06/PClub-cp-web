@@ -1,3 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Barlow:wght@300&family=Bebas+Neue&display=swap");
+::-webkit-scrollbar {
+  width: 0;
+}
+
 body {
   background: #255c6d;
   padding: 0;
@@ -11,10 +17,10 @@ body {
   margin: 0;
 }
 .home_sec1 {
-  background: url("../media/circle.png") no-repeat;
-  background-size: 100vh;
-  background-position-y: -65vh;
-  background-position-x: 75vw;
+  background: url("../media/d2.png") no-repeat;
+  background-size: 30vh;
+  background-position-y: 0px;
+  background-position-x: 80vw;
 }
 
 .home_sec1_img {
@@ -30,21 +36,31 @@ body {
   margin-left: 0;
 }
 .home_title {
+  font-family: "Bebas Neue", cursive;
   color: white;
-  font-size: 5.5vw;
-  padding-top: 27vh;
-  padding-right: 2vw;
-  line-height: 12vh;
+  font-size: 70px;
+  margin-top: 22%;
+  margin-right: 50%;
+  line-height: 60px;
 }
-.ahduni{
-  font-size:1.7vw; 
-  line-height: 8vh;
+.home_title > span {
+  font-family: "Barlow", sans-serif;
+  font-size: 2.5vw;
+  line-height: 0px !important;
+}
+.ahduni {
+  font-size: 2vw;
+  padding-bottom: 10px;
+  padding-left: 2px;
+  color: rgba(255, 255, 255, 1);
 }
 a {
   text-decoration: none;
   color: inherit;
 }
-
+.button-div {
+  margin-top: 0.5vh;
+}
 .cta {
   position: relative;
   margin: auto;
@@ -95,6 +111,63 @@ a {
   transform: scale(0.96);
 }
 
+.contribution {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 3px;
+  padding-right: 5px;
+  color: white;
+}
+.contribution > span > a:hover {
+  color: black !important;
+}
+.d3 {
+  position: absolute;
+  top: 40%;
+  left: 65%;
+}
+
+@keyframes updown {
+  0% {
+    bottom: -20%;
+  }
+  100% {
+    bottom: 1%;
+  }
+}
+.host_con {
+  position: absolute;
+  color: black;
+  background: white;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  top: 28%;
+  right: 0;
+  padding-top: 25px;
+  padding: 10px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+.host {
+  padding-bottom: 30px;
+}
+.host:nth-child(3) {
+  padding-bottom: 10px;
+}
+.host > img {
+  max-width: 90px;
+}
+.host:nth-child(2) > img {
+  max-width: 120px;
+}
+
+.d3 > img {
+  max-width: 150px;
+}
+
 @media only screen and (max-width: 600px) {
   .bg-transparent {
     background: #255c6d !important;
@@ -106,9 +179,20 @@ a {
     font-size: 15vw;
     line-height: 7vh;
   }
-  .ahduni{
+  .ahduni {
     font-size: 7vw;
-    padding-left: 3vw;
     padding-top: 2vh;
+    line-height: 3.5vh;
+    margin-top: 0 !important;
+  }
+
+  .home_sec1_txt > .ahduni {
+    padding-left: 3vw;
+  }
+  .button-div {
+    margin-top: 2.5vh;
+  }
+  .contribution {
+    display: none;
   }
 }
