@@ -193,6 +193,36 @@ a {
     margin-top: 2.5vh;
   }
   .contribution {
+    font-size: 13px;
+  }
+  .host > img {
+    max-width: 50px;
+  }
+  .host:nth-child(2) > img {
+    max-width: 60px;
+  }
+  .host_con {
+    top: 55%;
+    position: fixed;
+    padding-bottom: 1vh;
+  }
+  .d3 {
     display: none;
+  }
+  .home_sec1 {
+    background-size: 0px;
+    height: auto;
+    min-height: 100vh;
+  }
+  html {
+    min-height: auto;
+  }
+  .home_sec1_txt {
+    padding-bottom: 15vh;
+    padding-left: 2vw;
+  }
+
+  .home_title > span {
+    font-size: 20px;
   }
 }
