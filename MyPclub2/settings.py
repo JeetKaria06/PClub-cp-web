@@ -26,7 +26,7 @@ SECRET_KEY = 'it_ghc79!)2&nworw==98d2(@40@+=zd)g=tw&e-^8=3*svh81'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['pclub-cp-competecode.herokuapp.com']
 
 
 # Application definition
