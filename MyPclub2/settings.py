@@ -26,7 +26,7 @@ SECRET_KEY = 'it_ghc79!)2&nworw==98d2(@40@+=zd)g=tw&e-^8=3*svh81'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['pclub-cp-competecode.herokuapp.com']
 
 
 # Application definition
@@ -122,9 +122,4 @@ USE_TZ = False
 
 STATIC_URL = '/static/'
 
-PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-STATICFILES_DIRS = (
-    os.path.join(PROJECT_DIR, 'static'),
-)
+django_heroku.settings(locals())
